@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,9 @@
 		9540394024766463008784DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9540393E24766463008784DB /* Main.storyboard */; };
 		9540394224766466008784DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9540394124766466008784DB /* Assets.xcassets */; };
 		9540394524766466008784DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9540394324766466008784DB /* LaunchScreen.storyboard */; };
+		95981DB1247B4DE2005A41FA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95981DB0247B4DE2005A41FA /* MainViewController.swift */; };
+		95981DB3247B51EA005A41FA /* ConsumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95981DB2247B51EA005A41FA /* ConsumeViewController.swift */; };
+		95981DB5247B5290005A41FA /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95981DB4247B5290005A41FA /* ListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		9540394124766466008784DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9540394424766466008784DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9540394624766466008784DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95981DB0247B4DE2005A41FA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		95981DB2247B51EA005A41FA /* ConsumeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumeViewController.swift; sourceTree = "<group>"; };
+		95981DB4247B5290005A41FA /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		C200CD8E0DD8A6FDDCD7F4A2 /* Pods-ManagementApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManagementApp.debug.xcconfig"; path = "Target Support Files/Pods-ManagementApp/Pods-ManagementApp.debug.xcconfig"; sourceTree = "<group>"; };
 		FB2B8FA49B0D6E9F5C4BDAC6 /* Pods_ManagementApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ManagementApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -48,7 +54,6 @@
 				C200CD8E0DD8A6FDDCD7F4A2 /* Pods-ManagementApp.debug.xcconfig */,
 				687E7E7F2B21B612003645DA /* Pods-ManagementApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -84,6 +89,9 @@
 				9540393824766463008784DB /* AppDelegate.swift */,
 				9540393A24766463008784DB /* SceneDelegate.swift */,
 				9540393C24766463008784DB /* ViewController.swift */,
+				95981DB0247B4DE2005A41FA /* MainViewController.swift */,
+				95981DB2247B51EA005A41FA /* ConsumeViewController.swift */,
+				95981DB4247B5290005A41FA /* ListViewController.swift */,
 				9540393E24766463008784DB /* Main.storyboard */,
 				9540394124766466008784DB /* Assets.xcassets */,
 				9540394324766466008784DB /* LaunchScreen.storyboard */,
@@ -209,7 +217,10 @@
 			files = (
 				9540393D24766463008784DB /* ViewController.swift in Sources */,
 				9540393924766463008784DB /* AppDelegate.swift in Sources */,
+				95981DB5247B5290005A41FA /* ListViewController.swift in Sources */,
 				9540393B24766463008784DB /* SceneDelegate.swift in Sources */,
+				95981DB3247B51EA005A41FA /* ConsumeViewController.swift in Sources */,
+				95981DB1247B4DE2005A41FA /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
