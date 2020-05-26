@@ -8,15 +8,25 @@
 
 import UIKit
 import XLPagerTabStrip
+import RealmSwift
 
 class ConsumeViewController: UIViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
-    
-    @IBOutlet weak var consumeTableView: UITableView!
-    
 
+    @IBOutlet weak var tableView: UITableView!
+    
+//    フィルターかける
+    var ItemArray = try! Realm().objects(Item.self).sorted(byKeyPath: "alertDay", ascending: true)
+    
+    let realm = try! Realm()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        let nib = UINib(nibName: "ConsumeTableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "ConsumeCell")
 
         // Do any additional setup after loading the view.
     }
@@ -26,7 +36,7 @@ class ConsumeViewController: UIViewController, IndicatorInfoProvider, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return ItemArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

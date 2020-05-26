@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2BE831595A1FEF8CAC679753 /* Pods_ManagementApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB2B8FA49B0D6E9F5C4BDAC6 /* Pods_ManagementApp.framework */; };
+		9528EFE0247CA0440063990B /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFDF247CA0440063990B /* Item.swift */; };
+		9528EFE3247CB5480063990B /* ConsumeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFE1247CB5480063990B /* ConsumeTableViewCell.swift */; };
+		9528EFE4247CB5480063990B /* ConsumeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9528EFE2247CB5480063990B /* ConsumeTableViewCell.xib */; };
 		9540393924766463008784DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540393824766463008784DB /* AppDelegate.swift */; };
 		9540393B24766463008784DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540393A24766463008784DB /* SceneDelegate.swift */; };
 		9540393D24766463008784DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540393C24766463008784DB /* ViewController.swift */; };
@@ -21,6 +24,9 @@
 
 /* Begin PBXFileReference section */
 		687E7E7F2B21B612003645DA /* Pods-ManagementApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManagementApp.release.xcconfig"; path = "Target Support Files/Pods-ManagementApp/Pods-ManagementApp.release.xcconfig"; sourceTree = "<group>"; };
+		9528EFDF247CA0440063990B /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		9528EFE1247CB5480063990B /* ConsumeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumeTableViewCell.swift; sourceTree = "<group>"; };
+		9528EFE2247CB5480063990B /* ConsumeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConsumeTableViewCell.xib; sourceTree = "<group>"; };
 		9540393524766463008784DB /* ManagementApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManagementApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9540393824766463008784DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9540393A24766463008784DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,7 +97,10 @@
 				9540393C24766463008784DB /* ViewController.swift */,
 				95981DB0247B4DE2005A41FA /* MainViewController.swift */,
 				95981DB2247B51EA005A41FA /* ConsumeViewController.swift */,
+				9528EFE1247CB5480063990B /* ConsumeTableViewCell.swift */,
+				9528EFE2247CB5480063990B /* ConsumeTableViewCell.xib */,
 				95981DB4247B5290005A41FA /* ListViewController.swift */,
+				9528EFDF247CA0440063990B /* Item.swift */,
 				9540393E24766463008784DB /* Main.storyboard */,
 				9540394124766466008784DB /* Assets.xcassets */,
 				9540394324766466008784DB /* LaunchScreen.storyboard */,
@@ -162,6 +171,7 @@
 			files = (
 				9540394524766466008784DB /* LaunchScreen.storyboard in Resources */,
 				9540394224766466008784DB /* Assets.xcassets in Resources */,
+				9528EFE4247CB5480063990B /* ConsumeTableViewCell.xib in Resources */,
 				9540394024766463008784DB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,8 +227,10 @@
 			files = (
 				9540393D24766463008784DB /* ViewController.swift in Sources */,
 				9540393924766463008784DB /* AppDelegate.swift in Sources */,
+				9528EFE3247CB5480063990B /* ConsumeTableViewCell.swift in Sources */,
 				95981DB5247B5290005A41FA /* ListViewController.swift in Sources */,
 				9540393B24766463008784DB /* SceneDelegate.swift in Sources */,
+				9528EFE0247CA0440063990B /* Item.swift in Sources */,
 				95981DB3247B51EA005A41FA /* ConsumeViewController.swift in Sources */,
 				95981DB1247B4DE2005A41FA /* MainViewController.swift in Sources */,
 			);

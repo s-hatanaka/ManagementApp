@@ -7,4 +7,5 @@ target 'ManagementApp' do
 
   # Pods for ManagementApp
     pod 'XLPagerTabStrip'
+    pod 'RealmSwift', '3.20.0'
 end
