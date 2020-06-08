@@ -7,28 +7,38 @@
 //
 
 import UIKit
+import RealmSwift
 import XLPagerTabStrip
 
 class ListViewController: UIViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
     
-
+    //MARK: - Outlet
+    
     @IBOutlet weak var ListTableView: UITableView!
     
+    let realm = try! Realm()
+    var ItemArray = try? Realm().objects(Item.self)
+    var categoryArray = try? Realm().objects(Category.self)
+    var item: Item?
     
+    
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-     
-
+        self.ListTableView.delegate = self
+        self.ListTableView.dataSource = self
+        
+        
         // Do any additional setup after loading the view.
     }
     
-    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-           return IndicatorInfo(title: "一覧")
-    }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+    
+    //MARK: - PrivateFunk
+    
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "一覧")
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -36,15 +46,24 @@ class ListViewController: UIViewController, IndicatorInfoProvider, UITableViewDe
         return listCell
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       guard let items = self.item else {
+           print("アイテムがありません")
+           return 0
+       }
+       
+       return items.categoryName.count
     }
-    */
-
+    
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

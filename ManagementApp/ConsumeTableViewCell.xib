@@ -9,57 +9,70 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="95" id="KGk-i7-Jjw" customClass="ConsumeTableViewCell" customModule="ManagementApp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="KGk-i7-Jjw" customClass="ConsumeTableViewCell" customModule="ManagementApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tnu-1P-qRO">
-                        <rect key="frame" x="0.0" y="0.0" width="95" height="95"/>
+                        <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="tnu-1P-qRO" secondAttribute="height" multiplier="1:1" id="dhz-vj-efF"/>
+                            <constraint firstAttribute="height" constant="65" id="Cl0-fn-eTg"/>
+                            <constraint firstAttribute="width" constant="65" id="Nun-gt-GTC"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UTa-ql-cLo">
-                        <rect key="frame" x="99" y="4" width="42" height="34"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UTa-ql-cLo">
+                        <rect key="frame" x="70" y="5" width="15" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="34" id="Chh-Vb-hz0"/>
-                            <constraint firstAttribute="height" constant="34" id="H6N-9d-xIK"/>
+                            <constraint firstAttribute="width" constant="15" id="AFu-ma-KP0"/>
+                            <constraint firstAttribute="height" constant="15" id="L5P-sm-dhV"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dml-zc-ruy">
-                        <rect key="frame" x="174" y="57" width="138" height="24"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cnf-2I-SIa">
+                        <rect key="frame" x="120" y="5" width="100" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="138" id="0X9-QT-NvV"/>
-                            <constraint firstAttribute="height" constant="24" id="LLg-iS-rku"/>
+                            <constraint firstAttribute="height" constant="20" id="1xi-tu-RV7"/>
+                            <constraint firstAttribute="width" constant="100" id="feU-XX-Mcm"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dml-zc-ruy">
+                        <rect key="frame" x="175" y="45" width="140" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="140" id="3fw-D7-eKN"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="UTa-ql-cLo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="9Gp-1a-BwW"/>
-                    <constraint firstItem="UTa-ql-cLo" firstAttribute="leading" secondItem="tnu-1P-qRO" secondAttribute="trailing" constant="4" id="JAV-mP-jfz"/>
-                    <constraint firstItem="tnu-1P-qRO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="O06-m6-t7m"/>
-                    <constraint firstAttribute="bottom" secondItem="Dml-zc-ruy" secondAttribute="bottom" constant="14" id="OoL-GB-hZg"/>
-                    <constraint firstAttribute="trailing" secondItem="Dml-zc-ruy" secondAttribute="trailing" constant="8" id="aH0-uh-x6k"/>
-                    <constraint firstItem="tnu-1P-qRO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="kH5-Q4-uZh"/>
-                    <constraint firstAttribute="bottom" secondItem="tnu-1P-qRO" secondAttribute="bottom" id="wNg-OL-lpg"/>
+                    <constraint firstItem="Cnf-2I-SIa" firstAttribute="leading" secondItem="UTa-ql-cLo" secondAttribute="trailing" constant="35" id="03T-mo-Jco"/>
+                    <constraint firstAttribute="bottom" secondItem="Dml-zc-ruy" secondAttribute="bottom" id="0Uh-Hy-FPe"/>
+                    <constraint firstItem="UTa-ql-cLo" firstAttribute="leading" secondItem="tnu-1P-qRO" secondAttribute="trailing" constant="5" id="7H2-gt-AlJ"/>
+                    <constraint firstAttribute="trailing" secondItem="Dml-zc-ruy" secondAttribute="trailing" constant="5" id="LGk-a2-8kV"/>
+                    <constraint firstItem="UTa-ql-cLo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="OHo-Xh-ccv"/>
+                    <constraint firstItem="tnu-1P-qRO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="RkJ-xe-QDA"/>
+                    <constraint firstItem="Dml-zc-ruy" firstAttribute="top" secondItem="Cnf-2I-SIa" secondAttribute="bottom" constant="20" id="jvi-dK-VGb"/>
+                    <constraint firstItem="Cnf-2I-SIa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="nxa-Ac-Dgx"/>
+                    <constraint firstItem="tnu-1P-qRO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="uNh-Sj-gUa"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="alertLabel" destination="Dml-zc-ruy" id="hko-Lp-qO2"/>
                 <outlet property="iconImageView" destination="tnu-1P-qRO" id="3g8-uN-9Mt"/>
+                <outlet property="itemCellLabel" destination="Cnf-2I-SIa" id="Ogw-pM-HM1"/>
                 <outlet property="itemCountLabel" destination="UTa-ql-cLo" id="htr-lh-nfx"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="169.75446428571428"/>
+            <point key="canvasLocation" x="147.82608695652175" y="-30.46875"/>
         </tableViewCell>
     </objects>
 </document>
