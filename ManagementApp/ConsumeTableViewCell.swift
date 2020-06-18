@@ -8,12 +8,16 @@
 
 import UIKit
 
+
 class ConsumeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var itemCellLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var itemCountLabel: UILabel!
     @IBOutlet weak var alertLabel: UILabel!
+    
+ 
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,5 +29,5 @@ class ConsumeTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-   
+ 
 }

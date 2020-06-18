@@ -14,7 +14,7 @@ class IconViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var iconCollectionView: UICollectionView!
     
     
-    private let icons = ["リンスー", "シャンプー", "トイレットペーパー", "歯ブラシ", "ボックスティッシュ","コロコロ"]
+    private let icons = ["リンスー", "シャンプー", "ハンドソープ", "石鹸", "歯ブラシ", "歯磨き粉", "シェイバー", "柔軟剤", "食器用洗剤", "スポンジ", "除菌スプレー", "トイレットペーパー", "ボックスティッシュ","マスク", "コロコロ", "ゴミ袋", "芳香剤"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

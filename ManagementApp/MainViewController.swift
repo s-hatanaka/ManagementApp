@@ -15,7 +15,9 @@ class MainViewController: ButtonBarPagerTabStripViewController {
     var ItemArray = try? Realm().objects(Item.self)
     var item: Item?
     let realm = try! Realm()
+    
     //MARK: - LifeCycle
+
     
     override func viewDidLoad() {
         
@@ -38,11 +40,14 @@ class MainViewController: ButtonBarPagerTabStripViewController {
         //バーの色
         settings.style.buttonBarBackgroundColor = UIColor.white
         //ボタンの色
-        settings.style.buttonBarItemBackgroundColor = UIColor(red: 73/255, green: 72/255, blue: 62/255, alpha: 1)
+        settings.style.buttonBarItemBackgroundColor = UIColor.white
+//        クリーム    UIColor(red: 1.000, green: 0.972, blue:0.862, alpha: 1.000)
         //セルの文字色
-        settings.style.buttonBarItemTitleColor = UIColor.white
+        settings.style.buttonBarItemTitleColor = UIColor(red: 0.286, green: 0.215, blue:0.349, alpha: 1.000)
         //セレクトバーの色
-        settings.style.selectedBarBackgroundColor = UIColor(red: 254/255, green: 0, blue: 124/255, alpha: 1)
+        settings.style.selectedBarBackgroundColor = UIColor(red: 0.882, green: 0.596, blue:0.705, alpha: 1.000)
+//        ぴんく    UIColor(red: 0.882, green: 0.596, blue:0.705, alpha: 1.000)
+        
     }
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {

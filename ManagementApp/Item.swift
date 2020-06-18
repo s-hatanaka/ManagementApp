@@ -13,7 +13,7 @@ class Category: Object {
 }
 
 class CategoryList: Object {
-    @objc dynamic var cayegoryTitle: String = ""
+    @objc dynamic var categoryTitle: String = ""
 }
 
 class Item: Object {
@@ -29,9 +29,13 @@ class Item: Object {
     // 消費期間
     @objc dynamic var dayCount: Int = 0
     // 通知日
-    @objc dynamic var alertDay: Date = Date()
+    @objc dynamic var alertDay: Int = 0
 
     @objc dynamic var categoryName:String = ""
+    
+    @objc dynamic var saveDay: Date = Date()
+    
+    @objc dynamic var consumeDay: String = ""
     
     @objc dynamic private var _itemImage: UIImage? = nil
     

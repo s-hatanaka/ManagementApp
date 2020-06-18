@@ -13,8 +13,9 @@
 
 import UIKit
 import RealmSwift
+import UserNotifications
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UNUserNotificationCenterDelegate {
     
     //MARK: - Outlet
     
@@ -29,17 +30,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     let realm = try! Realm()
-    var category: Category!
-//    var ItemArray = try? Realm().objects(Item.self)
-    var categoryname = try! Realm().objects(Category.self)
+    var fistItem = try! Realm().objects(Item.self).first
+    var category: Category?
+    var categoryString = try! Realm().objects(Category.self)
     var item: Item?
-    var categoryPicker = UIPickerView() {
-        didSet {
-            self.categoryPicker.delegate = self
-            self.categoryPicker.dataSource = self
-            
-        }
-    }
+    var categoryPicker = UIPickerView()
     
     
     
@@ -48,30 +43,64 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
+        
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
         self.view.addGestureRecognizer(tapGesture)
         
         if let items = item {
             self.itemTextField.text = items.itemName
-            let itemCountStr = String(items.itemCount)
-            self.itemCountTextField.text = itemCountStr
+            let cal = Calendar(identifier: .gregorian)
+            // 現在日時を dt に代入
+            let dt1 = Date()
+            let dt2 = items.saveDay
+            let a = cal.dateComponents([.day], from: dt2, to: dt1 )
+            print("差は \(a.day!) 日")
+            let b = (a.day ?? 0) / items.dayCount
+            let c = items.itemCount - b
+            let itemCountNum = String( c )
+            self.itemCountTextField.text = itemCountNum
             let dayCountStr = String(items.dayCount)
             self.consumeDayTextField.text = dayCountStr
             self.iconImageView.image = items.itemImage
-            
+            self.categoryTextField.text = items.categoryName
+           
         } else {
             self.item = Item()
+            guard let items = item else { return }
             let allitem = realm.objects(Item.self)
             if allitem.count != 0 {
-                item!.id = allitem.max(ofProperty: "id")! + 1
+                items.id = allitem.max(ofProperty: "id")! + 1
             }
         }
+        
         self.setCategoryPicker()
+        self.categoryPicker.delegate = self
+        self.categoryPicker.dataSource = self
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+        let itemArray = try! Realm().objects(Item.self)
+        for i in 0..<itemArray.count {
+                   
+                   let cal = Calendar(identifier: .japanese)
+                   // 現在日時を dt に代入
+                   let dt1 = Date(timeIntervalSinceNow: 60 * 60 * 9)
+                   var compornents = DateComponents()
+                   compornents.day = itemArray[i].dayCount
+                   // ○日後を求める（60秒 × 60分 × 24時間 × dayCount）
+                   let dt2 = dt1.addingTimeInterval(TimeInterval(60 * 60 * 24 * (compornents.day ?? 0)))
+                   let dayArithmetic = cal.dateComponents([.day], from: dt1, to: dt2)
+                   
+                   try! realm.write {
+                       if let dayArithmetic = dayArithmetic.day {
+                           itemArray[i].alertDay = dayArithmetic * itemArray[i].itemCount
+                     
+                       }
+                   }
+               }
     
-    
+    }
     //MARK: - PrivateMethod
     
     private func setCategoryPicker() {
@@ -85,28 +114,60 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.categoryTextField.inputAccessoryView = toolbar
     }
     
+    // ローカル通知の表示内容
+    func setNotification(item: Item) {
+           let content = UNMutableNotificationContent()
+           guard let item = self.item else { return }
+           content.title = item.itemName
+           content.body = "(消費期限まであと  \(item.alertDay)  日です！)"
+           content.sound = UNNotificationSound.default
+           
+           //通知する日付を設定
+           let dt1 = item.saveDay
+           var compornents = DateComponents()
+           compornents.day = item.dayCount - 1
+        
+           // ○日後を求める（60秒 × 60分 × 24時間 × dayCount）
+           if let comporentDay = compornents.day  {
+               let dt2 = dt1.addingTimeInterval(TimeInterval(60 * 60 * 24 * comporentDay ))
+              if item.itemCount <= 1 {
+               let component = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: dt2 )
+               let trigger = UNCalendarNotificationTrigger.init(dateMatching: component, repeats: true)
+        
+               let request = UNNotificationRequest(identifier: String(item.id), content: content, trigger: trigger)
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+               }
+           }
+    }
+    
+    /// pickerの列
+    /// - Parameter pickerView: pickerView
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
+    /// pickerの行
+    /// - Parameter pickerView: pickerView
+    /// - Parameter component: categories.count
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-       
-        let categories: List<CategoryList> = categoryname.first!.categories
-        print(categories.count)
+        let categories: List<CategoryList> = categoryString.first!.categories
         return categories.count
     }
     
-    
+    /// pickerの内容
+    /// - Parameter pickerView: pickerView
+    /// - Parameter row: categories
+    /// - Parameter component: categoryTitle
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let categories: List<CategoryList> = categoryname.first!.categories
-        
-        return categories[row].cayegoryTitle
-        
+        let categories: List<CategoryList> = categoryString.first!.categories
+        return categories[row].categoryTitle
     }
     
+    
+    /// カテゴリ選択時
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let categories: List<CategoryList> = categoryname.first!.categories
-        self.categoryTextField.text = categories[row].cayegoryTitle
+        let categories: List<CategoryList> = categoryString.first!.categories
+        self.categoryTextField.text = categories[row].categoryTitle
     }
     
     @objc func cancel() {
@@ -122,26 +183,30 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     //MARK: - Action
     
     @IBAction func saveButton(_ sender: UIButton) {
-        guard let unwrapItem = self.item, let itemName = self.itemTextField.text, !itemName.isEmpty else {
-            // ダイアログ
-            let dialog = UIAlertController(title: "保存できません", message: "商品名を入力してください", preferredStyle: .alert)
-            dialog.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(dialog, animated: true, completion: nil)
-            
-            return
+        guard let items = self.item, let itemName = self.itemTextField.text, !itemName.isEmpty,
+            let categoryName = self.categoryTextField.text, !categoryName.isEmpty else {
+                // ダイアログ
+                let dialog = UIAlertController(title: "保存できません", message: "商品名orカテゴリーを入力してください", preferredStyle: .alert)
+                dialog.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(dialog, animated: true, completion: nil)
+               
+                return
         }
-        
         do {
             try realm.write {
-                unwrapItem.itemName = itemName
+                items.itemName = itemName
                 if let itemCountNum = Int(itemCountTextField.text ??  "0") {
-                    unwrapItem.itemCount = itemCountNum
+                    items.itemCount = itemCountNum
                 }
                 if let dayCountNum = Int(consumeDayTextField.text ?? "0") {
-                    unwrapItem.dayCount = dayCountNum
+                    items.dayCount = dayCountNum
                 }
-                unwrapItem.itemImage = self.iconImageView.image
-                self.realm.add(unwrapItem, update: .modified)
+                items.itemImage = self.iconImageView.image
+                items.categoryName = categoryName
+                let today = Date(timeIntervalSinceNow: 60 * 60 * 9)
+                items.saveDay = today
+                print(items.saveDay)
+                self.realm.add(items, update: .modified)
             }
         } catch let error {
             let dialog = UIAlertController(title: "保存できません", message: "商品名を入力してください", preferredStyle: .alert)
@@ -151,9 +216,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             // ダイアログ表示
             print(error)
         }
-        
+
         self.dismiss(animated: true, completion: nil)
+        
     }
+    
     
     @IBAction func backButton(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
