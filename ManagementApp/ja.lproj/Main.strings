@@ -1,0 +1,51 @@
+
+/* Class = "UITabBarItem"; title = "Calendar"; ObjectID = "0X2-bz-liO"; */
+"0X2-bz-liO.title" = "Calendar";
+
+/* Class = "UISearchBar"; placeholder = "探す"; ObjectID = "3fh-0v-J78"; */
+"3fh-0v-J78.placeholder" = "探す";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "65f-EB-0Dk"; */
+"65f-EB-0Dk.title" = "Item";
+
+/* Class = "UILabel"; text = "    Label"; ObjectID = "B0e-bA-mjt"; */
+"B0e-bA-mjt.text" = "    Label";
+
+/* Class = "UIButton"; normalTitle = "保存"; ObjectID = "ECg-wv-LF6"; */
+"ECg-wv-LF6.normalTitle" = "保存";
+
+/* Class = "UILabel"; text = "カテゴリー"; ObjectID = "OUP-US-N3x"; */
+"OUP-US-N3x.text" = "カテゴリー";
+
+/* Class = "UITextField"; placeholder = "商品名"; ObjectID = "Suc-fc-gUS"; */
+"Suc-fc-gUS.placeholder" = "商品名";
+
+/* Class = "UILabel"; text = "在庫数"; ObjectID = "U1x-b4-rDF"; */
+"U1x-b4-rDF.text" = "在庫数";
+
+/* Class = "UITabBarItem"; title = "home"; ObjectID = "aWw-Hr-dCc"; */
+"aWw-Hr-dCc.title" = "home";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "c35-pJ-TUH"; */
+"c35-pJ-TUH.title" = "Item";
+
+/* Class = "UILabel"; text = "個"; ObjectID = "czq-Kg-YGF"; */
+"czq-Kg-YGF.text" = "個";
+
+/* Class = "UILabel"; text = "1個あたりの消費日数"; ObjectID = "dVe-O2-ySn"; */
+"dVe-O2-ySn.text" = "1個あたりの消費日数";
+
+/* Class = "UIButton"; normalTitle = "×"; ObjectID = "qi3-hm-XBJ"; */
+"qi3-hm-XBJ.normalTitle" = "×";
+
+/* Class = "UIViewController"; title = "main"; ObjectID = "rAW-Gr-TKn"; */
+"rAW-Gr-TKn.title" = "main";
+
+/* Class = "UIViewController"; title = "list"; ObjectID = "uK7-56-hEB"; */
+"uK7-56-hEB.title" = "list";
+
+/* Class = "UIViewController"; title = "consume"; ObjectID = "v0U-C9-kXb"; */
+"v0U-C9-kXb.title" = "consume";
+
+/* Class = "UILabel"; text = "日"; ObjectID = "zpG-9y-mah"; */
+"zpG-9y-mah.text" = "日";

@@ -6,11 +6,6 @@
 //  Copyright © 2020 sari.hatanaka. All rights reserved.
 //
 
-// やってみることリスト
-// カテゴリ初期値の保存場所の変更
-// カテゴリを読み込む
-// それができたら自分なりにコード整理
-
 import UIKit
 import RealmSwift
 import UserNotifications
@@ -55,15 +50,19 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             let dt2 = items.saveDay
             let a = cal.dateComponents([.day], from: dt2, to: dt1 )
             print("差は \(a.day!) 日")
-            let b = (a.day ?? 0) / items.dayCount
-            let c = items.itemCount - b
-            let itemCountNum = String( c )
-            self.itemCountTextField.text = itemCountNum
-            let dayCountStr = String(items.dayCount)
-            self.consumeDayTextField.text = dayCountStr
+            if let a = a.day {
+                let b = a / items.dayCount
+                let c = items.itemCount - b
+                let itemCountNum = String( c )
+                self.itemCountTextField.text = itemCountNum
+                let dayCountStr = String(items.dayCount)
+                self.consumeDayTextField.text = dayCountStr
+            } else {
+                self.consumeDayTextField.text = "0"
+            }
             self.iconImageView.image = items.itemImage
             self.categoryTextField.text = items.categoryName
-           
+            
         } else {
             self.item = Item()
             guard let items = item else { return }
@@ -79,27 +78,26 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
+        super.viewWillDisappear(animated)
         let itemArray = try! Realm().objects(Item.self)
         for i in 0..<itemArray.count {
-                   
-                   let cal = Calendar(identifier: .japanese)
-                   // 現在日時を dt に代入
-                   let dt1 = Date(timeIntervalSinceNow: 60 * 60 * 9)
-                   var compornents = DateComponents()
-                   compornents.day = itemArray[i].dayCount
-                   // ○日後を求める（60秒 × 60分 × 24時間 × dayCount）
-                   let dt2 = dt1.addingTimeInterval(TimeInterval(60 * 60 * 24 * (compornents.day ?? 0)))
-                   let dayArithmetic = cal.dateComponents([.day], from: dt1, to: dt2)
-                   
-                   try! realm.write {
-                       if let dayArithmetic = dayArithmetic.day {
-                           itemArray[i].alertDay = dayArithmetic * itemArray[i].itemCount
-                     
-                       }
-                   }
-               }
-    
+            
+            let cal = Calendar(identifier: .japanese)
+            // 現在日時を dt に代入
+            let dt1 = Date(timeIntervalSinceNow: 60 * 60 * 9)
+            var compornents = DateComponents()
+            compornents.day = itemArray[i].dayCount
+            // ○日後を求める（60秒 × 60分 × 24時間 × dayCount）
+            let dt2 = dt1.addingTimeInterval(TimeInterval(60 * 60 * 24 * (compornents.day ?? 0)))
+            let dayArithmetic = cal.dateComponents([.day], from: dt1, to: dt2)
+            
+            try! realm.write {
+                if let dayArithmetic = dayArithmetic.day {
+                    itemArray[i].alertDay = dayArithmetic * itemArray[i].itemCount
+                    
+                }
+            }
+        }
     }
     //MARK: - PrivateMethod
     
@@ -115,30 +113,32 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     // ローカル通知の表示内容
-    func setNotification(item: Item) {
-           let content = UNMutableNotificationContent()
-           guard let item = self.item else { return }
-           content.title = item.itemName
-           content.body = "(消費期限まであと  \(item.alertDay)  日です！)"
-           content.sound = UNNotificationSound.default
-           
-           //通知する日付を設定
-           let dt1 = item.saveDay
-           var compornents = DateComponents()
-           compornents.day = item.dayCount - 1
+    private func setNotification(item: Item) {
+        let content = UNMutableNotificationContent()
+        guard let item = self.item else { return }
+        content.title = ("消費予定日 \(item.alertDay) 日前です！")
+        content.body = ("\(item.itemName) の在庫はありますか？" )
+        content.sound = UNNotificationSound.default
         
-           // ○日後を求める（60秒 × 60分 × 24時間 × dayCount）
-           if let comporentDay = compornents.day  {
-               let dt2 = dt1.addingTimeInterval(TimeInterval(60 * 60 * 24 * comporentDay ))
-              if item.itemCount <= 1 {
-               let component = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: dt2 )
-               let trigger = UNCalendarNotificationTrigger.init(dateMatching: component, repeats: true)
+        //通知する日付を設定
+        let dt1 = item.saveDay
+        var compornents = DateComponents()
+        compornents.day = item.dayCount - 1
         
-               let request = UNNotificationRequest(identifier: String(item.id), content: content, trigger: trigger)
+        // ○日後を求める（60秒 × 60分 × 24時間 × dayCount）
+        if let comporentDay = compornents.day  {
+            let dt2 = dt1.addingTimeInterval(TimeInterval(60 * 60 * 24 * comporentDay ))
+            if item.itemCount <= 1 {
+                let component = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: dt2 )
+                let trigger = UNCalendarNotificationTrigger.init(dateMatching: component, repeats: false)
+                //                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5.0, repeats: false)
+                let request = UNNotificationRequest(identifier: String(item.id), content: content, trigger: trigger)
                 UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-               }
-           }
+            }
+        }
     }
+    
+    //MARK: - DelegateMethod
     
     /// pickerの列
     /// - Parameter pickerView: pickerView
@@ -189,7 +189,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 let dialog = UIAlertController(title: "保存できません", message: "商品名orカテゴリーを入力してください", preferredStyle: .alert)
                 dialog.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(dialog, animated: true, completion: nil)
-               
+                
                 return
         }
         do {
@@ -207,20 +207,19 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 items.saveDay = today
                 print(items.saveDay)
                 self.realm.add(items, update: .modified)
+                //通知セット
+                setNotification(item: items)
             }
         } catch let error {
             let dialog = UIAlertController(title: "保存できません", message: "商品名を入力してください", preferredStyle: .alert)
             dialog.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(dialog, animated: true, completion: nil)
-            
             // ダイアログ表示
             print(error)
         }
-
         self.dismiss(animated: true, completion: nil)
         
     }
-    
     
     @IBAction func backButton(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
